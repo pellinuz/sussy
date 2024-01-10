@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Creazione Link</title>
+
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
+
+			body {
+				font-family: 'Exo 2', sans-serif;
+				background: #2E2F40;
+				color: white;
+			}
+
+			#outputimg {
+				width: 35%;
+				max-width: 70%;
+				max-height: 70%;
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: 20px;
+				border: 8px solid black;
+			}
+
+			a {
+				color: lime;
+				text-decoration: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<center>
+			<h1>Create Link</h1>
+			<label for="number">Type your number:</label>
+			<input type="number" id="number" name="number" placeholder="Es. 289255">
+
+			<button type="button" onclick="createLink()">Create Link</button>
+			<button type="button" onclick="randomNum()">Random Number</button>
+
+			<select name="format" id="format">
+				<option value="jpg">JPG</option>
+				<option value="mp4">MP4</option>
+			</select>
+
+			<br />
+			<div id="output"></div>
+			<br />
+			<div id="output_image"></div>
+		</center>
+
+		<script>
+
+			/*
+			async function checkLink(url) {
+				try {
+					const response = await fetch(url, { method: 'HEAD' });
+					return response.ok;
+				} catch (error) {
+					console.error('Errore nella verifica del link:', error);
+					return false;
+				}
+			}
+			*/
+
+			async function randomNum() {
+
+				var inputfield1 = document.getElementById("number");
+				const min = 1000;
+				const max = 300000;
+				var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+				inputfield1.value = randomNumber;
+				randomNumber = (String)(randomNumber);
+				//var linkToVerify = "https://r34xyz.b-cdn.net/posts/" + (String)(randomNumber.slice(0, -3)) + "/" + randomNumber + "/" + randomNumber + ".mp4";
+				//const isReachable = await checkLink(linkToVerify);
+
+				/*if(isReachable) {
+					var link = "https://r34xyz.b-cdn.net/posts/" + (String)(randomNumber.slice(0, -3)) + "/" + randomNumber + "/" + randomNumber + ".mp4";
+					var output = document.getElementById("output");
+					var outputImage = document.getElementById("output_image");
+					output.innerHTML = '<a href="' + link + '" target="_blank">' + link + '</a>';
+					outputImage.innerHTML = '<video><source id="outputimg" src="' + link + '" target="_blank"></source>Il tuo browser non supporta i video.</video>';
+				} else {*/
+				var link = "https://r34xyz.b-cdn.net/posts/" + (String)(randomNumber.slice(0, -3)) + "/" + randomNumber + "/" + randomNumber + ".jpg";
+				var output = document.getElementById("output");
+				var outputImage = document.getElementById("output_image");
+				output.innerHTML = '<a href="' + link + '" target="_blank">' + link + '</a>';
+				outputImage.innerHTML = '<img id="outputimg" src="' + link + '" target="_blank"></img>';
+				//}
+			}
+
+
+			async function createLink() {
+
+				var format = document.getElementById("format").value;
+				var setformat = "";
+
+				if (format == "jpg") {
+					setformat = ".jpg";
+				} else if (format == "mp4") {
+					setformat = ".mp4";
+				}
+
+				var num = (String)(document.getElementById("number").value);
+				if (num == "") {
+					var output = document.getElementById("output");
+					output.innerHTML = '<p>Inserisci un numero compreso tra 1\'000 e 300\'000 per poter generare un link!</p>';
+					var outputImage = document.getElementById("output_image");
+					outputImage.innerHTML = '';
+				}
+				else if (parseInt(num) < 1000 || parseInt(num) > 300000) {
+					console.log("[1]", num);
+					var output = document.getElementById("output");
+					output.innerHTML = '<p>Inserisci un numero compreso tra 1\'000 e 300\'000 per poter generare un link!</p>';
+					var outputImage = document.getElementById("output_image");
+					outputImage.innerHTML = '';
+				}
+				else {
+					//var linkMp4 = "https://r34xyz.b-cdn.net/posts/" + num.slice(0, -3) + "/" + num + "/" + num + ".mp4";
+					var linkJpg = "https://r34xyz.b-cdn.net/posts/" + num.slice(0, -3) + "/" + num + "/" + num + setformat;
+					var output = document.getElementById("output");
+					var outputImage = document.getElementById("output_image");
+					//const isReachable = await checkLink(linkMp4);
+
+					/*if(isReachable) {
+						output.innerHTML = '<a href="' + linkMp4 + '" target="_blank">' + linkMp4 + '</a>';
+						outputImage.innerHTML = '<video><source id="outputimg" src="' + linkMp4 + '" target="_blank"></source>Il tuo browser non supporta i video.</video>';
+					} else {*/
+					output.innerHTML = '<a href="' + linkJpg + '" target="_blank">' + linkJpg + '</a>';
+					if (format=="mp4"){
+						outputImage.innerHTML = '<video controls width=35%><source type="video/mp4" id="outputimg" src="' + linkJpg + '" target="_blank"></source>Il tuo browser non supporta i video.</video>';
+					} else if (format=="jpg") {
+						outputImage.innerHTML = '<img id="outputimg" src="' + linkJpg + '" target="_blank"></img>';
+					}
+					//}
+				}
+			}
+
+			var inputText = document.querySelector('#number');
+			inputText.addEventListener('keydown', function (event) {
+				if (event.key == 'Enter') {
+					createLink();
+				}
+			});
+
+		</script>
+	</body>
+        </html>
