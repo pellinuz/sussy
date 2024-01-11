@@ -50,6 +50,8 @@
 			<br />
 			<div id="output"></div>
 			<br />
+			<div id="output-link"></div>
+			<br />
 			<div id="output_image"></div>
 		</center>
 
@@ -123,6 +125,8 @@
 					//var linkMp4 = "https://r34xyz.b-cdn.net/posts/" + num.slice(0, -3) + "/" + num + "/" + num + ".mp4";
 					var linkJpg = "https://r34xyz.b-cdn.net/posts/" + num.slice(0, -3) + "/" + num + "/" + num + setformat;
 					var output = document.getElementById("output");
+					var linkPost = "https://r-34.xyz/posts/" + num;
+					var outputLink = document.getElementById("output-link");
 					var outputImage = document.getElementById("output_image");
 					//const isReachable = await checkLink(linkMp4);
 
@@ -130,6 +134,7 @@
 						output.innerHTML = '<a href="' + linkMp4 + '" target="_blank">' + linkMp4 + '</a>';
 						outputImage.innerHTML = '<video><source id="outputimg" src="' + linkMp4 + '" target="_blank"></source>Il tuo browser non supporta i video.</video>';
 					} else {*/
+					outputLink.innerHTML = '<a href"' + linkPost + '" target="_blank">' + linkPost + '</a>';
 					output.innerHTML = '<a href="' + linkJpg + '" target="_blank">' + linkJpg + '</a>';
 					if (format=="mp4"){
 						outputImage.innerHTML = '<video controls width=35%><source type="video/mp4" id="outputimg" src="' + linkJpg + '" target="_blank"></source>Il tuo browser non supporta i video.</video>';
@@ -146,7 +151,6 @@
 					createLink();
 				}
 			});
-
 		</script>
 	</body>
-        </html>
+</html>
