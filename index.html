@@ -30,7 +30,6 @@
 				text-decoration: none;
 			}
 		</style>
-
 	</head>
 
 	<body>
@@ -56,7 +55,6 @@
 		</center>
 
 		<script>
-
 			/*
 			async function checkLink(url) {
 				try {
@@ -89,6 +87,8 @@
 				} else {*/
 				var link = "https://r34xyz.b-cdn.net/posts/" + (String)(randomNumber.slice(0, -3)) + "/" + randomNumber + "/" + randomNumber + ".jpg";
 				var output = document.getElementById("output");
+				var linkPost = "https://r-34.xyz/posts/" + num;
+				var outputLink = document.getElementById("output-link");
 				var outputImage = document.getElementById("output_image");
 				output.innerHTML = '<a href="' + link + '" target="_blank">' + link + '</a>';
 				outputImage.innerHTML = '<img id="outputimg" src="' + link + '" target="_blank"></img>';
